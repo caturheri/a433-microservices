@@ -1,0 +1,19 @@
+version: '2'  # Versi Docker Compose yang digunakan
+
+services:
+  item-app:
+    image: ghcr.io/caturheri/item-app:v1  # Nama dan versi Docker image untuk service item-app
+    ports:
+      - "80:8080"  # Mapping port 80 di host ke port 8080 di container
+    depends_on:
+      - item-db  # Item-app akan hanya berjalan setelah item-db diluncurkan
+    restart: always  # Restart policy, akan selalu mencoba untuk restart jika terhenti
+
+  item-db:
+    image: mongo:3  # Nama dan versi Docker image untuk service item-db
+    volumes:
+      - app-db:/data/db  # Menggunakan volume bernama app-db
+    restart: always  # Restart policy, akan selalu mencoba untuk restart jika terhenti
+
+volumes:
+  app-db:  # Nama volume yang digunakan
