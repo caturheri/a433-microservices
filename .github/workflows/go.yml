@@ -1,0 +1,37 @@
+# This workflow will build a golang project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+
+name: Go
+
+on:
+  push:
+    branches: [ "karsajobs" ]
+  pull_request:
+    branches: [ "karsajobs" ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.20'
+
+    - name: Lint Dockerfile
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y hadolint
+        hadolint -f dockerfile Dockerfile
+
+    - name: Test App
+      run: |
+        go test -v -short --count=1 $(go list ./...)
+
+    - name: Build App Karsajobs
+      run: |
+        docker build -t karsajobs:latest .
+        docker push karsajobs:latest
