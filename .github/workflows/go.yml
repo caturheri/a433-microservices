@@ -32,7 +32,7 @@ jobs:
           go test -v -short --count=1 $(go list ./...)
 
       - name: Build & Push App Karsajobs
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v1
         with:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
