@@ -18,7 +18,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v4
         with:
-          go-version: "1.20"
+          go-version: "1.15"
 
       - name: Lint Dockerfile
         run: |
@@ -33,6 +33,6 @@ jobs:
 
       - name: Build & Push App Karsajobs
         run: |
-          docker build -t ghcr.io/caturheri/karsajobs:latest .
           echo "${{ secrets.CR_PAT }}" | docker login ghcr.io -u "caturheri" --password-stdin
+          docker build -t ghcr.io/caturheri/karsajobs:latest .
           docker push ghcr.io/caturheri/karsajobs:latest
