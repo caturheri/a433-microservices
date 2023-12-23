@@ -34,6 +34,7 @@ jobs:
       - name: Build & Push App Karsajobs
         uses: docker/build-push-action@v5
         with:
+          context: .
           push: true
           tags: caturheri/karsajobs:latest
           secrets: |
