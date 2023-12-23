@@ -33,6 +33,6 @@ jobs:
 
       - name: Build & Push App Karsajobs
         run: |
-          echo "${{ secrets.CR_PAT }}" | docker login ghcr.io -u "caturheri" --pasword-stdin
           docker build -t ghcr.io/caturheri/karsajobs:latest .
+          echo "${{ secrets.CR_PAT }}" | docker login ghcr.io -u "caturheri" --password-stdin
           docker push ghcr.io/caturheri/karsajobs:latest
