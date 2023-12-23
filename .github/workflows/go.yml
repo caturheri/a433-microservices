@@ -40,6 +40,8 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build & Push App Karsajobs
-        run: |
-          docker build . --tag ghcr.io/caturheri/karsajobs:latest
-          docker push ghcr.io/caturheri/karsajobs:latest
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: caturheri/karsajobs:latest
