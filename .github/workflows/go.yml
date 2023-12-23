@@ -41,6 +41,6 @@ jobs:
 
       - name: Build & Push App Karsajobs
         run: |
-          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "caturheri" --password-stdin
+          echo "${{ secrets.CR_PAT }}" | docker login ghcr.io -u "caturheri" --password-stdin
           docker build . --tag ghcr.io/caturheri/karsajobs:latest
           docker push ghcr.io/caturheri/karsajobs:latest
