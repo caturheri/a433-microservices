@@ -32,9 +32,10 @@ jobs:
           go test -v -short --count=1 $(go list ./...)
 
       - name: Build & Push App Karsajobs
-        env:
-          CR_PAT: ${{ secrets.CR_PAT }}
-        run: |
-          echo $CR_PAT | docker login ghcr.io -u "caturheri" --password-stdin
-          docker build -t ghcr.io/caturheri/karsajobs:latest .
-          docker push ghcr.io/caturheri/karsajobs:latest
+        uses: docker/build-push-action@v5
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          repository: ${{ github.repository }}/next
+          tags: latest
