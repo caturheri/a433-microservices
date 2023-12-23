@@ -32,7 +32,7 @@ jobs:
           go test -v -short --count=1 $(go list ./...)
 
       - name: Build App Karsajobs
-      - env:
+        env:
           CR_PAT: ${{ secrets.CR_PAT }}
         run: |
           docker build -t ghcr.io/caturheri/karsajobs:latest .
