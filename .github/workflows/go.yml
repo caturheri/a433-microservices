@@ -32,10 +32,8 @@ jobs:
           go test -v -short --count=1 $(go list ./...)
 
       - name: Build & Push App Karsajobs
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v5
         with:
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          registry: ghcr.io
-          repository: ${{ github.repository }}/karsajobs
+          context: .
+          push: true
           tags: caturheri/karsajobs:latest
