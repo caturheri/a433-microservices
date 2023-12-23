@@ -5,33 +5,33 @@ name: Go
 
 on:
   push:
-    branches: [ "karsajobs" ]
+    branches: ["karsajobs"]
   pull_request:
-    branches: [ "karsajobs" ]
+    branches: ["karsajobs"]
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Set up Go
-      uses: actions/setup-go@v4
-      with:
-        go-version: '1.20'
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: "1.20"
 
-    - name: Lint Dockerfile
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y hadolint
-        hadolint -f dockerfile Dockerfile
+      - name: Lint Dockerfile
+        run: |
+          sudo apt-get update
+          wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v2.12.0/hadolint-Linux-x86_64
+          chmod +x /bin/hadolint
+          hadolint -f dockerfile Dockerfile
 
-    - name: Test App
-      run: |
-        go test -v -short --count=1 $(go list ./...)
+      - name: Test App
+        run: |
+          go test -v -short --count=1 $(go list ./...)
 
-    - name: Build App Karsajobs
-      run: |
-        docker build -t karsajobs:latest .
-        docker push karsajobs:latest
+      - name: Build App Karsajobs
+        run: |
+          docker build -t karsajobs:latest .
+          docker push karsajobs:latest
