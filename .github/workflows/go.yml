@@ -40,5 +40,5 @@ jobs:
 
       - name: Build & Push App Karsajobs
         run: |
-          docker build -t ghcr.io/caturheri/karsajobs:latest
+          docker build . --tag ghcr.io/caturheri/karsajobs:latest
           docker push ghcr.io/caturheri/karsajobs:latest
