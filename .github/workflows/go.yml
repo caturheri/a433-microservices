@@ -31,10 +31,8 @@ jobs:
         run: |
           go test -v -short --count=1 $(go list ./...)
 
-      - name: Build App Karsajobs
-        env:
-          CR_PAT: ${{ secrets.CR_PAT }}
+      - name: Build & Push App Karsajobs
         run: |
+          echo "${{ secrets.CR_PAT }}" | docker login ghcr.io -u "caturheri" --pasword-stdin
           docker build -t ghcr.io/caturheri/karsajobs:latest .
-          echo "$CR_PAT" | docker login ghcr.io -u caturheri --pasword-stdin
           docker push ghcr.io/caturheri/karsajobs:latest
