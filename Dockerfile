@@ -13,6 +13,8 @@ ENV NODE_ENV=production
 RUN npm ci
 # Menyalin semua file dengan ekstensi ".js" ke dalam direktori kerja
 COPY ./*.js ./
+# Menambahkan instruksi EXPOSE untuk mengekspos port 3000 untuk lingkungan production
+EXPOSE 3000
 # Menentukan perintah default yang akan dijalankan ketika container dimulai
 CMD ["node", "index.js"]
  
@@ -30,7 +32,7 @@ ENV NODE_ENV=development
 RUN npm install
 # Menyalin semua file ke dalam direktori kerja.
 COPY . .
+# Menambahkan instruksi EXPOSE untuk mengekspos port 3000 untuk lingkungan development
+EXPOSE 3000
 # Menentukan perintah default yang akan dijalankan ketika container dimulai.
 CMD ["node", "index.js"]
-# Menambahkan instruksi EXPOSE untuk mengekspos port 3000
-EXPOSE 3000
