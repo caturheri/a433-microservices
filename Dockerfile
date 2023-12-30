@@ -32,3 +32,5 @@ RUN npm install
 COPY . .
 # Menentukan perintah default yang akan dijalankan ketika container dimulai.
 CMD ["node", "index.js"]
+# Menambahkan instruksi EXPOSE untuk mengekspos port 3000
+EXPOSE 3000
